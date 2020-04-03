@@ -56,6 +56,8 @@ void loop()
   StaticJsonBuffer<300> JSONbuffer;
   JsonObject& status = JSONbuffer.createObject();
 
+
+  //Call all modules one by one - takes 3 secs, delay 2 secs. Total 5 secs.
   MQ2_sensorval = MQ2();
   status["mq2"] = MQ2_sensorval;
   Blynk.virtualWrite(V3,MQ2_sensorval);
@@ -68,6 +70,8 @@ void loop()
   
   temperature = Weather();
   status["temperature"] = temperature;
+
+  Flame();
     
   char JSONmessageBuffer[300];
   status.printTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
